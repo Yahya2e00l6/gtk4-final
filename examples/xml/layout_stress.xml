@@ -1,0 +1,58 @@
+<window xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../schemas/ui-wrapper.xsd"
+        title="Layout Stress XML"
+        icon-name="applications-development-symbolic"
+        default-width="980"
+        default-height="760"
+        resizable="true"
+        decorated="true">
+
+  <box orientation="vertical" spacing="18" margin="16" hexpand="true" vexpand="true">
+
+    <label text="1) Same row: far left, centered, far right" css-class="title-2" halign="start" />
+    <grid column-spacing="12" row-spacing="8" hexpand="true">
+      <button label="LEFT" width="140" col="0" row="0" />
+      <label text="CENTER" halign="center" hexpand="true" col="1" row="0" />
+      <button label="RIGHT" width="140" halign="end" col="2" row="0" />
+    </grid>
+
+    <label text="2) Random grid positions and spans" css-class="title-2" halign="start" />
+    <grid column-spacing="10" row-spacing="10" hexpand="true">
+      <button label="0,0" width="90" col="0" row="0" />
+      <button label="4,0" width="90" col="4" row="0" />
+      <label text="spans 3 cols" css-class="title-1" halign="center" col="1" row="1" colspan="3" />
+      <entry placeholder="wide entry at row 2" width="420" col="0" row="2" colspan="4" />
+      <button label="tiny" width="70" col="4" row="2" />
+      <checkbox label="lower-left" col="0" row="4" />
+      <radio-button id="stress_a" label="A" col="2" row="4" />
+      <radio-button label="B" group-with="stress_a" is-active="true" col="3" row="4" />
+      <radio-button label="C" group-with="stress_a" col="4" row="4" />
+    </grid>
+
+    <label text="3) Margins: push individual widgets around" css-class="title-2" halign="start" />
+    <box orientation="vertical" spacing="8">
+      <button label="normal start" width="180" halign="start" />
+      <button label="pushed right by margin-start=220" width="260" margin-start="220" halign="start" />
+      <button label="aligned end" width="180" halign="end" />
+      <button label="center + top margin" width="220" margin-top="18" halign="center" />
+    </box>
+
+    <label text="4) Mixed form: labels left, fields right" css-class="title-2" halign="start" />
+    <grid column-spacing="12" row-spacing="10" halign="start">
+      <label text="Name" col="0" row="0" />
+      <entry placeholder="left field" width="220" col="1" row="0" />
+      <label text="Score" col="3" row="0" />
+      <spin-button min="0" max="20" value="12" width="90" col="4" row="0" />
+
+      <label text="Choice" col="0" row="1" />
+      <dropdown options="First,Second,Third" width="220" col="1" row="1" />
+      <button label="Submit on far col" width="160" col="4" row="1" />
+    </grid>
+
+    <box orientation="horizontal" spacing="32" margin-top="16" halign="center">
+      <button label="OK" icon-name="emblem-ok-symbolic" width="180" height="50" />
+      <button label="Cancel" icon-name="window-close-symbolic" width="180" height="50" />
+    </box>
+
+  </box>
+</window>

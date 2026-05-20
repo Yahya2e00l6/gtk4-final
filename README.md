@@ -16,13 +16,20 @@ make clean  # Clean build
 ## XML Demo
 
 - Build and run default XML: `make xml-demo`
-- Run a specific XML file: `make xml-demo XML=examples/demo_forms.xml`
-- Direct binary usage: `./build/xml-demo examples/demo_dashboard.xml`
+- Run a specific XML file: `make xml-demo XML=examples/xml/demo_forms.xml`
+- Direct binary usage: `./build/xml-demo examples/xml/demo_dashboard.xml`
 
 Available XML examples:
-- `examples/demo_forms.xml`
-- `examples/demo_dashboard.xml`
-- `examples/demo_gallery.xml`
+- `examples/xml/demo_app.xml`
+- `examples/xml/demo_forms.xml`
+- `examples/xml/demo_dashboard.xml`
+- `examples/xml/demo_gallery.xml`
+- `examples/xml/assignment_ui_short.xml`
+- `examples/xml/layout_stress.xml`
+
+Wrapper C API examples:
+- Assignment UI: `make assignment-api`
+- Layout stress UI: `make layout-stress-api`
 
 ## Technical Reports (LaTeX)
 

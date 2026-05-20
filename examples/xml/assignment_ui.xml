@@ -1,0 +1,193 @@
+<window title="Test des fonctions GTK+"
+        icon-name="applications-development-symbolic"
+        background-image="imagew.png"
+        default-width="900"
+        default-height="900"
+        min-width="760"
+        min-height="720"
+        resizable="true"
+        decorated="true">
+
+  <box orientation="vertical"
+       spacing="16"
+       margin="16">
+
+    <menubar halign="start">
+      <menu-section label="MonChoix">
+        <menu-item label="Sous Choix 1" on-activate="on_menu_about" />
+        <menu-item label="Sous Choix2">
+          <menu-item label="Choix221" on-activate="on_menu_about" />
+          <menu-item label="Choix222" on-activate="on_menu_about" />
+          <menu-item label="Choix223" on-activate="on_menu_about" />
+        </menu-item>
+        <menu-item label="Sous Choix3" on-activate="on_menu_about" />
+      </menu-section>
+      <menu-section label="VotreChoix">
+        <menu-item label="Sous Choix 1" on-activate="on_menu_about" />
+        <menu-item label="Sous Choix2">
+          <menu-item label="Choix221" on-activate="on_menu_about" />
+          <menu-item label="Choix222" on-activate="on_menu_about" />
+          <menu-item label="Choix223" on-activate="on_menu_about" />
+        </menu-item>
+        <menu-item label="Sous Choix3" on-activate="on_menu_about" />
+      </menu-section>
+      <menu-section label="LeurChoix">
+        <menu-item label="Sous Choix 1" on-activate="on_menu_about" />
+        <menu-item label="Sous Choix2">
+          <menu-item label="Choix221" on-activate="on_menu_about" />
+          <menu-item label="Choix222" on-activate="on_menu_about" />
+          <menu-item label="Choix223" on-activate="on_menu_about" />
+        </menu-item>
+        <menu-item label="Sous Choix3" on-activate="on_menu_about" />
+      </menu-section>
+    </menubar>
+
+    <box orientation="vertical" spacing="4">
+      <label text="Vos connaissances de GTK+"
+             halign="start" />
+      <box orientation="horizontal"
+           spacing="18"
+           halign="start">
+        <radio-button id="knowledge_weak"
+                      label="Faible" />
+        <radio-button id="knowledge_medium"
+                      label="Moyen"
+                      group-with="knowledge_weak" />
+        <radio-button id="knowledge_good"
+                      label="Bien"
+                      group-with="knowledge_weak" />
+        <radio-button id="knowledge_very_good"
+                      label="Très Bien"
+                      group-with="knowledge_weak"
+                      is-active="true" />
+      </box>
+    </box>
+
+    <box orientation="vertical" spacing="4">
+      <label text="Vos Commentaires sur GTK+"
+             halign="start" />
+      <box orientation="horizontal"
+           spacing="18"
+           halign="start">
+        <checkbox label="Convivial" />
+        <checkbox label="Intéressant" active="true" />
+        <checkbox label="Facile à utiliser" />
+        <checkbox label="Optimise le travail" />
+      </box>
+    </box>
+
+    <grid column-spacing="10"
+          row-spacing="10"
+          margin-top="24"
+          margin-start="18"
+          halign="start">
+      <label text="Zone de saisie"
+             layout-col="0"
+             layout-row="0" />
+      <entry placeholder="Saisir un texte"
+             width="280"
+             col="1"
+             row="0"
+             colspan="4" />
+
+      <label text="Choix de date"
+             css-class="title-2"
+             col="0"
+             row="1"
+             colspan="6" />
+
+      <label text="Jour"
+             layout-col="0"
+             layout-row="2" />
+      <spin-button min="1"
+                   max="31"
+                   step="1"
+                   value="1"
+                   numeric-only="true"
+                   width="80"
+                   col="1"
+                   row="2" />
+
+      <label text="mois"
+             layout-col="2"
+             layout-row="2" />
+      <spin-button min="0"
+                   max="12"
+                   step="1"
+                   value="0"
+                   numeric-only="true"
+                   width="80"
+                   col="3"
+                   row="2" />
+
+      <label text="année"
+             layout-col="4"
+             layout-row="2" />
+      <spin-button min="0"
+                   max="2100"
+                   step="1"
+                   value="0"
+                   numeric-only="true"
+                   width="100"
+                   col="5"
+                   row="2" />
+
+      <dropdown options="Faire un choix,Choix 1,Choix 2,Choix 3"
+                selected-index="0"
+                width="240"
+                col="0"
+                row="3"
+                colspan="3" />
+    </grid>
+
+    <button label="Afficher le dialogue"
+            icon-name="dialog-warning-symbolic"
+            style-width="260"
+            style-margin-top="24"
+            style-halign="center"
+            on-clicked="on_show_dialog" />
+
+    <box orientation="vertical"
+         spacing="4"
+         style-margin-start="360"
+         style-halign="start">
+      <label text="Le CoronaVirus"
+             style-halign="start" />
+      <box orientation="horizontal" spacing="12">
+        <radio-button id="covid_sick"
+                      label="Malade" />
+        <radio-button id="covid_suspect"
+                      label="Suspect"
+                      group-with="covid_sick" />
+        <radio-button id="covid_healed"
+                      label="Guéri"
+                      group-with="covid_sick" />
+        <radio-button id="covid_healthy"
+                      label="Sain"
+                      group-with="covid_sick"
+                      is-active="true" />
+      </box>
+    </box>
+
+    <box orientation="horizontal"
+         spacing="80"
+         style-margin-top="24"
+         style-halign="center">
+      <button label="_OK"
+              icon-name="emblem-ok-symbolic"
+              use-underline="true"
+              style-width="240"
+              style-height="58" />
+      <button label="Quitter"
+              icon-name="application-exit-symbolic"
+              style-width="240"
+              style-height="58" />
+    </box>
+
+    <label id="status_label"
+           text="Ready"
+           style-margin-top="8"
+           style-halign="start" />
+
+  </box>
+</window>

@@ -102,6 +102,16 @@ static int attr_int(const gchar **names, const gchar **values,
     return v ? atoi(v) : fallback;
 }
 
+static int attr_int_alias(const gchar **names, const gchar **values,
+                          const char *key, const char *fallback_key,
+                          int fallback) {
+    const char *v = find_attr(names, values, key);
+    if (!v && fallback_key) {
+        v = find_attr(names, values, fallback_key);
+    }
+    return v ? atoi(v) : fallback;
+}
+
 static double attr_double(const gchar **names, const gchar **values,
                           const char *key, double fallback) {
     const char *v = find_attr(names, values, key);
@@ -143,32 +153,38 @@ static GtkAlign attr_align(const gchar **names,
 static widget_style_config parse_style(const gchar **names,
                                        const gchar **values) {
     widget_style_config s = {0};
-    s.margin_top    = attr_int(names, values, "style-margin-top", 0);
-    s.margin_bottom = attr_int(names, values, "style-margin-bottom", 0);
-    s.margin_start  = attr_int(names, values, "style-margin-start", 0);
-    s.margin_end    = attr_int(names, values, "style-margin-end", 0);
-    s.width_request  = attr_int(names, values, "style-width", 0);
-    s.height_request = attr_int(names, values, "style-height", 0);
+    int margin = attr_int(names, values, "margin", 0);
+    s.margin_top    = attr_int_alias(names, values, "margin-top", "style-margin-top", margin);
+    s.margin_bottom = attr_int_alias(names, values, "margin-bottom", "style-margin-bottom", margin);
+    s.margin_start  = attr_int_alias(names, values, "margin-start", "style-margin-start", margin);
+    s.margin_end    = attr_int_alias(names, values, "margin-end", "style-margin-end", margin);
+    s.width_request  = attr_int_alias(names, values, "width", "style-width", 0);
+    s.height_request = attr_int_alias(names, values, "height", "style-height", 0);
     
-    if (find_attr(names, values, "style-halign")) {
-        s.halign = attr_align(names, values, "style-halign", GTK_ALIGN_FILL);
+    if (find_attr(names, values, "halign") || find_attr(names, values, "style-halign")) {
+        const char *key = find_attr(names, values, "halign") ? "halign" : "style-halign";
+        s.halign = attr_align(names, values, key, GTK_ALIGN_FILL);
         s.set_halign = true;
     }
-    if (find_attr(names, values, "style-valign")) {
-        s.valign = attr_align(names, values, "style-valign", GTK_ALIGN_FILL);
+    if (find_attr(names, values, "valign") || find_attr(names, values, "style-valign")) {
+        const char *key = find_attr(names, values, "valign") ? "valign" : "style-valign";
+        s.valign = attr_align(names, values, key, GTK_ALIGN_FILL);
         s.set_valign = true;
     }
 
-    if (find_attr(names, values, "style-hexpand")) {
-        s.hexpand = attr_bool(names, values, "style-hexpand", false);
+    if (find_attr(names, values, "hexpand") || find_attr(names, values, "style-hexpand")) {
+        const char *key = find_attr(names, values, "hexpand") ? "hexpand" : "style-hexpand";
+        s.hexpand = attr_bool(names, values, key, false);
         s.set_hexpand = true;
     }
-    if (find_attr(names, values, "style-vexpand")) {
-        s.vexpand = attr_bool(names, values, "style-vexpand", false);
+    if (find_attr(names, values, "vexpand") || find_attr(names, values, "style-vexpand")) {
+        const char *key = find_attr(names, values, "vexpand") ? "vexpand" : "style-vexpand";
+        s.vexpand = attr_bool(names, values, key, false);
         s.set_vexpand = true;
     }
 
-    const char *css = find_attr(names, values, "style-css-class");
+    const char *css = find_attr(names, values, "css-class");
+    if (!css) css = find_attr(names, values, "style-css-class");
     if (css) s.css_class = css;
 
     const char *tip = find_attr(names, values, "tooltip");
@@ -213,10 +229,10 @@ static void add_to_parent_at(parser_state *ps, GtkWidget *widget,
 /* Add a newly-created widget to the current parent container */
 static void add_to_parent(parser_state *ps, GtkWidget *widget, 
                           const gchar **names, const gchar **values) {
-    int col = attr_int(names, values, "layout-col", 0);
-    int row = attr_int(names, values, "layout-row", 0);
-    int colspan = attr_int(names, values, "layout-colspan", 1);
-    int rowspan = attr_int(names, values, "layout-rowspan", 1);
+    int col = attr_int_alias(names, values, "col", "layout-col", 0);
+    int row = attr_int_alias(names, values, "row", "layout-row", 0);
+    int colspan = attr_int_alias(names, values, "colspan", "layout-colspan", 1);
+    int rowspan = attr_int_alias(names, values, "rowspan", "layout-rowspan", 1);
     add_to_parent_at(ps, widget, col, row, colspan, rowspan);
 }
 

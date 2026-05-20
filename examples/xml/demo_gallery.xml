@@ -1,5 +1,5 @@
 <window xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="schemas/ui-wrapper.xsd"
+        xsi:noNamespaceSchemaLocation="../../schemas/ui-wrapper.xsd"
         title="XML Demo - Gallery"
         icon-name="folder-pictures-symbolic"
         widget-name="wrapper-window"

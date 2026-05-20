@@ -34,7 +34,8 @@ DEP = $(OBJ:.o=.d)
 
 # XML demo target
 XML_TARGET = $(BUILD_DIR)/xml-demo
-XML ?= demo_app.xml
+XML_DIR = examples/xml
+XML ?= $(XML_DIR)/demo_app.xml
 XML_SRC = xml_demo_main.c \
 	src/widgets/xml_parser.c \
 	src/widgets/common.c \
@@ -52,6 +53,36 @@ XML_SRC = xml_demo_main.c \
 XML_OBJ = $(patsubst %.c,$(BUILD_DIR)/%.o,$(XML_SRC))
 XML_DEP = $(XML_OBJ:.o=.d)
 
+# Assignment demo built with wrapper C APIs
+ASSIGNMENT_TARGET = $(BUILD_DIR)/assignment-api
+ASSIGNMENT_SRC = examples/c/assignment_api_main.c \
+	src/widgets/common.c \
+	src/widgets/window.c \
+	src/widgets/container.c \
+	src/widgets/button.c \
+	src/widgets/input.c \
+	src/widgets/toggle.c \
+	src/widgets/display.c \
+	src/widgets/dialog.c \
+	src/widgets/menu.c \
+	src/widgets/theme.c
+ASSIGNMENT_OBJ = $(patsubst %.c,$(BUILD_DIR)/%.o,$(ASSIGNMENT_SRC))
+ASSIGNMENT_DEP = $(ASSIGNMENT_OBJ:.o=.d)
+
+# Layout stress demo built with wrapper C APIs
+LAYOUT_STRESS_TARGET = $(BUILD_DIR)/layout-stress-api
+LAYOUT_STRESS_SRC = examples/c/layout_stress_api_main.c \
+	src/widgets/common.c \
+	src/widgets/window.c \
+	src/widgets/container.c \
+	src/widgets/button.c \
+	src/widgets/input.c \
+	src/widgets/toggle.c \
+	src/widgets/display.c \
+	src/widgets/theme.c
+LAYOUT_STRESS_OBJ = $(patsubst %.c,$(BUILD_DIR)/%.o,$(LAYOUT_STRESS_SRC))
+LAYOUT_STRESS_DEP = $(LAYOUT_STRESS_OBJ:.o=.d)
+
 all: $(TARGET)
 
 $(BUILD_DIR):
@@ -62,6 +93,12 @@ $(TARGET): $(OBJ)
 
 $(XML_TARGET): $(XML_OBJ)
 	$(CC) $(CFLAGS) -o $(XML_TARGET) $(XML_OBJ) $(LIBS)
+
+$(ASSIGNMENT_TARGET): $(ASSIGNMENT_OBJ)
+	$(CC) $(CFLAGS) -o $(ASSIGNMENT_TARGET) $(ASSIGNMENT_OBJ) $(LIBS)
+
+$(LAYOUT_STRESS_TARGET): $(LAYOUT_STRESS_OBJ)
+	$(CC) $(CFLAGS) -o $(LAYOUT_STRESS_TARGET) $(LAYOUT_STRESS_OBJ) $(LIBS)
 
 $(BUILD_DIR)/%.o: %.c
 	mkdir -p $(dir $@)
@@ -79,6 +116,12 @@ run: $(TARGET)
 xml-demo: $(XML_TARGET)
 	$(XML_TARGET) $(XML)
 
-.PHONY: all clean debug run xml-demo
+assignment-api: $(ASSIGNMENT_TARGET)
+	$(ASSIGNMENT_TARGET)
 
--include $(DEP)
+layout-stress-api: $(LAYOUT_STRESS_TARGET)
+	$(LAYOUT_STRESS_TARGET)
+
+.PHONY: all clean debug run xml-demo assignment-api layout-stress-api
+
+-include $(DEP) $(XML_DEP) $(ASSIGNMENT_DEP) $(LAYOUT_STRESS_DEP)

@@ -37,6 +37,18 @@
   </xs:simpleType>
 
   <xs:attributeGroup name="commonStyleAttrs">
+    <xs:attribute name="margin" type="xs:integer"/>
+    <xs:attribute name="margin-top" type="xs:integer"/>
+    <xs:attribute name="margin-bottom" type="xs:integer"/>
+    <xs:attribute name="margin-start" type="xs:integer"/>
+    <xs:attribute name="margin-end" type="xs:integer"/>
+    <xs:attribute name="width" type="xs:integer"/>
+    <xs:attribute name="height" type="xs:integer"/>
+    <xs:attribute name="halign" type="alignType"/>
+    <xs:attribute name="valign" type="alignType"/>
+    <xs:attribute name="hexpand" type="boolLike"/>
+    <xs:attribute name="vexpand" type="boolLike"/>
+    <xs:attribute name="css-class" type="xs:string"/>
     <xs:attribute name="style-margin-top" type="xs:integer"/>
     <xs:attribute name="style-margin-bottom" type="xs:integer"/>
     <xs:attribute name="style-margin-start" type="xs:integer"/>
@@ -52,6 +64,10 @@
   </xs:attributeGroup>
 
   <xs:attributeGroup name="layoutAttrs">
+    <xs:attribute name="col" type="xs:integer"/>
+    <xs:attribute name="row" type="xs:integer"/>
+    <xs:attribute name="colspan" type="xs:integer"/>
+    <xs:attribute name="rowspan" type="xs:integer"/>
     <xs:attribute name="layout-col" type="xs:integer"/>
     <xs:attribute name="layout-row" type="xs:integer"/>
     <xs:attribute name="layout-colspan" type="xs:integer"/>

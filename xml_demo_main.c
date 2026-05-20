@@ -7,7 +7,7 @@
 #include <gtk/gtk.h>
 #include <string.h>
 
-static const char *g_xml_demo_file = "demo_app.xml";
+static const char *g_xml_demo_file = "examples/xml/demo_app.xml";
 
 static void xml_demo_activate(GtkApplication *app, gpointer user_data) {
     (void)user_data;
